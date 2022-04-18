@@ -1,30 +1,16 @@
 from authentise import reverse_letters, reverse_words
 import unittest
-from unittest.mock import patch
 
 
 class TestStringReversing(unittest.TestCase):
-    # Test letters reversing with mocking input
-    @patch('authentise.get_input')
-    def test_reverse_l(self, mock_input):
-        mock_input.return_value = 'qwerty uiop'
-        self.assertEqual(reverse_letters(), 'poiu ytrewq')
-
-    @patch('authentise.get_input')
-    def test_reverse_empty_l(self, mock_input):
-        mock_input.return_value = ''
-        self.assertEqual(reverse_letters(), '')
-
-    # Test word reversing with mocking input
-    @patch('authentise.get_input')
-    def test_reverse_w(self, mock_input):
-        mock_input.return_value = 'qwerty uiop'
-        self.assertEqual(reverse_words(), 'uiop qwerty')
-
-    @patch('authentise.get_input')
-    def test_reverse_empty_w(self, mock_input):
-        mock_input.return_value = ''
-        self.assertEqual(reverse_words(), '')
+    # Test letters reversing function
+    def test_reverse_l(self):
+        self.assertEqual(reverse_letters('qwerty uiop'), 'poiu ytrewq')
+        self.assertEqual(reverse_letters('qwerty \n uiop'), 'poiu \n ytrewq')
+    # Test word reversing function
+    def test_reverse_w(self):
+        self.assertEqual(reverse_words('qwerty uiop'), 'uiop qwerty')
+        self.assertEqual(reverse_words('qwerty \n uiop'), 'uiop \n qwerty')
 
 
 if __name__ == '__main__':
