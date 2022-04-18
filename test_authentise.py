@@ -30,6 +30,12 @@ class TestStringReversing(unittest.TestCase):
         self.assertRaises(Exception, reverse_control(sys.argv[1:]))
         sys.argv = ['authentise.py', 'qwerty uiop', '']
         self.assertRaises(Exception, reverse_control(sys.argv[1:]))
+        # Test command input with path/file name
+        sys.argv = ['authentise.py', '//wsl.localhost/Ubuntu/etc/debian_version', '-r']
+        self.assertEqual(reverse_control(sys.argv[1:]), 'noisrev_naibed')
+        # Test command input with path/file name
+        sys.argv = ['authentise.py', r'\\wsl.localhost\Ubuntu\etc\debian_version', '-r']
+        self.assertEqual(reverse_control(sys.argv[1:]), 'noisrev_naibed')
 
 
 if __name__ == '__main__':
