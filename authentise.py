@@ -57,5 +57,5 @@ def reverse_control(arguments):
         output = reverse_words(arguments[0])
     return output
 
-
-print(reverse_control(sys.argv[1:]))
+if __name__ == '__main__':
+    print(reverse_control(sys.argv[1:]))
