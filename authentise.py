@@ -10,6 +10,7 @@
 
 import sys
 import argparse
+from os import path
 
 
 class SmartFormatter(argparse.HelpFormatter):
@@ -26,7 +27,8 @@ parser = argparse.ArgumentParser(description='This program reverse a quoted stri
                                  formatter_class=SmartFormatter)
 # First argument
 parser.add_argument('quoted string', type=str,
-                    help='R|Write your quoted string')
+                    help='R|If the string provided is a existing path/filename,\n'
+                         'the program will take the file name as input')
 # Second argument
 parser.add_argument('-r', '-w', action='store_true', required=True,
                     help='R|-r: reverse the string character wise\n'
@@ -50,12 +52,18 @@ def reverse_words(in_text):
 
 
 def reverse_control(arguments):
+    # Determines if the string is a file by its existence
+    if path.isfile(arguments[0]):
+        string_arg = path.basename(arguments[0])
+    else:
+        string_arg = arguments[0]
     # Choose the reverse function depending on the input
     if arguments[1] == '-r':
-        output = reverse_letters(arguments[0])
+        output = reverse_letters(string_arg)
     else:
-        output = reverse_words(arguments[0])
+        output = reverse_words(string_arg)
     return output
+
 
 if __name__ == '__main__':
     print(reverse_control(sys.argv[1:]))
